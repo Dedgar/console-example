@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Takedowns Chart - SRE Dashboard</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/patternfly.css">
+<link rel="stylesheet" href="/css/patternfly-charts.css">
+<script src="/js/Chart.min.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+
+<body>
+  <body>
+    <div class="pf-c-page" id="card-view-example">
+        <a
+          class="pf-c-skip-to-content pf-c-button pf-m-primary"
+          href="#main-content-card-view-example"
+        >Skip to content</a>
+        <header class="pf-c-page__header">
+          <div class="pf-c-page__header-brand">
+            <div class="pf-c-page__header-brand-toggle">
+              <button
+                class="pf-c-button pf-m-plain"
+                type="button"
+                id="card-view-example-nav-toggle"
+                aria-label="Global navigation"
+                aria-expanded="true"
+                aria-controls="card-view-example-primary-nav"
+              >
+                <i class="fas fa-bars" aria-hidden="true"></i>
+              </button>
+            </div>
+            <a href="#" class="pf-c-page__header-brand-link">
+              <img
+                class="pf-c-brand"
+                src="/assets/images/PF-Masthead-Logo.svg"
+                alt="Patternfly Logo"
+              />
+            </a>
+          </div>
+      
+          <div class="pf-c-page__header-tools">
+            <div class="pf-c-page__header-tools-group">
+              <div
+                class="pf-c-page__header-tools-item pf-m-hidden pf-m-visible-on-lg"
+              >
+                <button
+                  class="pf-c-button pf-m-plain"
+                  type="button"
+                  aria-label="Settings"
+                >
+                  <i class="fas fa-cog" aria-hidden="true"></i>
+                </button>
+              </div>
+              <div
+                class="pf-c-page__header-tools-item pf-m-hidden pf-m-visible-on-lg"
+              >
+                <button
+                  class="pf-c-button pf-m-plain"
+                  type="button"
+                  aria-label="Help"
+                >
+                  <i class="pf-icon pf-icon-help" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+            <div class="pf-c-page__header-tools-group">
+              <div class="pf-c-page__header-tools-item pf-m-hidden-on-lg">
+                <div class="pf-c-dropdown">
+                  <button
+                    class="pf-c-dropdown__toggle pf-m-plain"
+                    id="card-view-example-dropdown-kebab-1-button"
+                    aria-expanded="false"
+                    type="button"
+                    aria-label="Actions"
+                  >
+                    <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+                  </button>
+                  <ul
+                    class="pf-c-dropdown__menu pf-m-align-right"
+                    aria-labelledby="card-view-example-dropdown-kebab-1-button"
+                    hidden
+                  >
+                    <li>
+                      <a class="pf-c-dropdown__menu-item" href="#">Link</a>
+                    </li>
+                    <li>
+                      <button class="pf-c-dropdown__menu-item" type="button">Action</button>
+                    </li>
+                    <li>
+                      <a
+                        class="pf-c-dropdown__menu-item pf-m-disabled"
+                        href="#"
+                        aria-disabled="true"
+                        tabindex="-1"
+                      >Disabled link</a>
+                    </li>
+                    <li>
+                      <button
+                        class="pf-c-dropdown__menu-item"
+                        type="button"
+                        disabled
+                      >Disabled action</button>
+                    </li>
+                    <li class="pf-c-divider" role="separator"></li>
+                    <li>
+                      <a class="pf-c-dropdown__menu-item" href="#">Separated link</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div
+                class="pf-c-page__header-tools-item pf-m-hidden pf-m-visible-on-md"
+              >
+                <div class="pf-c-dropdown">
+                  <button
+                    class="pf-c-dropdown__toggle"
+                    id="card-view-example-dropdown-kebab-2-button"
+                    aria-expanded="false"
+                    type="button"
+                  >
+                    <span class="pf-c-dropdown__toggle-text">John Smith</span>
+                    <span class="pf-c-dropdown__toggle-icon">
+                      <i class="fas fa-caret-down" aria-hidden="true"></i>
+                    </span>
+                  </button>
+                  <ul
+                    class="pf-c-dropdown__menu"
+                    aria-labelledby="card-view-example-dropdown-kebab-2-button"
+                    hidden
+                  >
+                    <li>
+                      <a class="pf-c-dropdown__menu-item" href="#">Link</a>
+                    </li>
+                    <li>
+                      <button class="pf-c-dropdown__menu-item" type="button">Action</button>
+                    </li>
+                    <li>
+                      <a
+                        class="pf-c-dropdown__menu-item pf-m-disabled"
+                        href="#"
+                        aria-disabled="true"
+                        tabindex="-1"
+                      >Disabled link</a>
+                    </li>
+                    <li>
+                      <button
+                        class="pf-c-dropdown__menu-item"
+                        type="button"
+                        disabled
+                      >Disabled action</button>
+                    </li>
+                    <li class="pf-c-divider" role="separator"></li>
+                    <li>
+                      <a class="pf-c-dropdown__menu-item" href="#">Separated link</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <img
+              class="pf-c-avatar"
+              src="/assets/images/img_avatar.svg"
+              alt="Avatar image"
+            />
+          </div>
+        </header>
+        <div class="pf-c-page__sidebar">
+          <div class="pf-c-page__sidebar-body">
+            <nav
+              class="pf-c-nav"
+              id="card-view-example-primary-nav"
+              aria-label="Global"
+            >
+              <ul class="pf-c-nav__list">
+                <li class="pf-c-nav__item">
+                  <a
+                    href="#"
+                    class="pf-c-nav__link pf-m-current"
+                    aria-current="page"
+                  >System Panel</a>
+                </li>
+                <li class="pf-c-nav__item">
+                  <a href="#" class="pf-c-nav__link">Policy</a>
+                </li>
+                <li class="pf-c-nav__item">
+                  <a href="#" class="pf-c-nav__link">Authentication</a>
+                </li>
+                <li class="pf-c-nav__item">
+                  <a href="#" class="pf-c-nav__link">Network Services</a>
+                </li>
+                <li class="pf-c-nav__item">
+                  <a href="#" class="pf-c-nav__link">Server</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <main
+          class="pf-c-page__main"
+          tabindex="-1"
+          id="main-content-card-view-example"
+        >
+          <section class="pf-c-page__main-section pf-m-light">
+            <div class="pf-c-content">
+              <h1>Scan results</h1>
+              <p>This is a breakdown of positive scan results.</p>
+            </div>
+          </section>
+          <section>
+            <div style="width:75%;">
+              <canvas id="canvas"></canvas>
+            </div>
+            <br>
+            <br>
+            <button id="dayButton">Day</button>
+            <button id="weekButton">Week</button>
+            <button id="monthButton">Month</button>
+            <button id="quarterButton">Quarter</button>
+            <br>
+            <p>
+                <pre id="jsonp-response"></pre>
+            </p>
+            <script>
+              window.bgColor = ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#42f4f4", "#ff7b00", "#fffa00", "#00c110", "#0039c1", "#7706e0", "#e08506", "#7caf8b", "#5208d3", "#dd0000", "#a0852c", "#5a706f", "#c8f48b", "#96876f"];
+          
+              var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+              var config = {
+                type: 'doughnut',
+                data: {
+                  labels: [{{range $key, $value := .catCount}}"{{$key}}",{{end}}],
+                  datasets: [{
+                    label: "Takedown categories for the selected period",
+                    backgroundColor: window.bgColor, 
+                    data: [{{range $key, $value := .catCount}}"{{$value}}",{{end}}],
+                  }]
+                },
+                options: {
+                  title: {
+                    display: true,
+                    text: 'Abusive accounts taken down by category'
+                  }
+                }
+              };
+          
+              document.getElementById('dayButton').addEventListener('click', function() {
+                var host_prefix = '{{.appDomain}}';
+                var url = host_prefix + '/api/takedowns?callback=?&dateparam=day';
+                $.getJSON(url, function(jsonp) {
+                    genGraph(jsonp);
+                });
+              });
+          
+              document.getElementById('weekButton').addEventListener('click', function() {
+                var host_prefix = '{{.appDomain}}';
+                var url = host_prefix + '/api/takedowns?callback=?&dateparam=week';
+                $.getJSON(url, function(jsonp) {
+                    genGraph(jsonp);
+                });
+              });
+          
+              document.getElementById('monthButton').addEventListener('click', function() {
+                var host_prefix = '{{.appDomain}}';
+                var url = host_prefix + '/api/takedowns?callback=?&dateparam=month';
+                $.getJSON(url, function(jsonp) {
+                    genGraph(jsonp);
+                });
+              });
+          
+              document.getElementById('quarterButton').addEventListener('click', function() {
+                var host_prefix = '{{.appDomain}}';
+                var url = host_prefix + '/api/takedowns?callback=?&dateparam=quarter';
+                $.getJSON(url, function(jsonp) {
+                    genGraph(jsonp);
+                });
+              });
+          
+                function genGraph(jsonp) {
+                  var newDataObject = {
+                    type: 'doughnut',
+                    data: {
+                      labels: Object.keys(jsonp.response),
+                      datasets: [{
+                        label: "Takedown categories for the selected period",
+                        backgroundColor: window.bgColor, 
+                        data: Object.values(jsonp.response),
+                      }]
+                    },
+                    options: {
+                      title: {
+                        display: true,
+                        text: 'Abusive accounts taken down by category'
+                      }
+                    }
+                  };
+                  var nctx = document.getElementById("canvas").getContext("2d");
+                  window.myLine.destroy();
+                  myLine = getNewChart(nctx, newDataObject);
+          
+                  var jsonpr = Object.values(jsonp.response);
+                  var arraySum = jsonpr.reduce(getSum);
+                  $("#jsonp-response").html("Total takedowns for the period: " + arraySum);
+          
+                  window.myLine.update();
+                };
+          
+              window.onload = function() {
+                var initArray = [{{range $key, $value := .catCount}}"{{$value}}",{{end}}];
+                var initSum = initArray.reduce(getSum);
+                $("#jsonp-response").html("Total takedowns for the period: " + initSum);
+          
+                var ctx = document.getElementById("canvas").getContext("2d");
+                window.myLine = getNewChart(ctx, config);
+              };
+          
+              function getSum(total, num) {
+                  return total + num;
+              }
+          
+              function getNewChart(canvas, config) {
+                  return new Chart(canvas, config);
+              }
+          
+            </script>
+          >
+          <section
+            class="pf-c-page__main-section pf-m-no-padding pf-m-light pf-m-sticky-bottom pf-m-no-fill"
+          >
+            <div class="pf-c-pagination pf-m-bottom">
+              <div class="pf-c-options-menu pf-m-top">
+                <div class="pf-c-options-menu__toggle pf-m-text pf-m-plain">
+                  <span class="pf-c-options-menu__toggle-text">
+                    <b>1 - 10</b>&nbsp;of&nbsp;
+                    <b>37</b>
+                  </span>
+                  <button
+                    class="pf-c-options-menu__toggle-button"
+                    id="pagination-options-menu-bottom-example-toggle"
+                    aria-haspopup="listbox"
+                    aria-expanded="false"
+                    aria-label="Items per page"
+                  >
+                    <span class="pf-c-options-menu__toggle-button-icon">
+                      <i class="fas fa-caret-down" aria-hidden="true"></i>
+                    </span>
+                  </button>
+                </div>
+                <ul
+                  class="pf-c-options-menu__menu pf-m-top"
+                  aria-labelledby="pagination-options-menu-bottom-example-toggle"
+                  hidden
+                >
+                  <li>
+                    <button
+                      class="pf-c-options-menu__menu-item"
+                      type="button"
+                    >5 per page</button>
+                  </li>
+                  <li>
+                    <button class="pf-c-options-menu__menu-item" type="button">
+                      10 per page
+                      <div class="pf-c-options-menu__menu-item-icon">
+                        <i class="fas fa-check" aria-hidden="true"></i>
+                      </div>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      class="pf-c-options-menu__menu-item"
+                      type="button"
+                    >20 per page</button>
+                  </li>
+                </ul>
+              </div>
+              <nav class="pf-c-pagination__nav" aria-label="Pagination">
+                <div class="pf-c-pagination__nav-control pf-m-first">
+                  <button
+                    class="pf-c-button pf-m-plain"
+                    type="button"
+                    disabled
+                    aria-label="Go to first page"
+                  >
+                    <i class="fas fa-angle-double-left" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <div class="pf-c-pagination__nav-control pf-m-prev">
+                  <button
+                    class="pf-c-button pf-m-plain"
+                    type="button"
+                    disabled
+                    aria-label="Go to previous page"
+                  >
+                    <i class="fas fa-angle-left" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <div class="pf-c-pagination__nav-page-select">
+                  <input
+                    class="pf-c-form-control"
+                    aria-label="Current page"
+                    type="number"
+                    min="1"
+                    max="4"
+                    value="1"
+                  />
+                  <span aria-hidden="true">of 4</span>
+                </div>
+                <div class="pf-c-pagination__nav-control pf-m-next">
+                  <button
+                    class="pf-c-button pf-m-plain"
+                    type="button"
+                    aria-label="Go to next page"
+                  >
+                    <i class="fas fa-angle-right" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <div class="pf-c-pagination__nav-control pf-m-last">
+                  <button
+                    class="pf-c-button pf-m-plain"
+                    type="button"
+                    aria-label="Go to last page"
+                  >
+                    <i class="fas fa-angle-double-right" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </nav>
+            </div>
+          </section>
+        </main>
+      </div>
+
+</body>
+</html>

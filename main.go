@@ -1,64 +1,52 @@
 package main
 
 import (
-	"io"
-	"log"
-	"net/http"
+	"context"
+	"fmt"
 	"os"
-	"path/filepath"
-	"strings"
-	"text/template"
+	"time"
 
-	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
+	"github.com/dedgar/console-example/downloader"
+	"github.com/dedgar/console-example/routers"
+	"github.com/dedgar/console-example/tree"
 )
 
 var (
-	sitePath = os.Getenv("SITE_PATH")
+	certFile     = os.Getenv("CERT_FILE")
+	keyFile      = os.Getenv("KEY_FILE")
+	downloadURL  = os.Getenv("DOWNLOAD_URL")
+	filePath     = os.Getenv("TLS_FILE_PATH")
+	startPort    = os.Getenv("TLS_START_PORT")
+	localTesting = os.Getenv("LOCAL_TESTING")
 )
 
-type Template struct {
-	templates *template.Template
-}
-
-func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
-	return t.templates.ExecuteTemplate(w, name, data)
-}
-
-// GET /home
-func getHome(c echo.Context) error {
-	return c.Render(http.StatusOK, "home.html", nil)
-}
-
 func main() {
-	if sitePath == "" {
-		sitePath = "."
-	}
-	t := &Template{
-		templates: func() *template.Template {
-			tmpl := template.New("")
-			if err := filepath.Walk(sitePath+"/tmpl", func(path string, info os.FileInfo, err error) error {
-				if strings.HasSuffix(path, ".html") {
-					_, err = tmpl.ParseFiles(path)
-					if err != nil {
-						log.Println(err)
-					}
-				}
-				return err
-			}); err != nil {
-				panic(err)
+	e := routers.Routers
+
+	if localTesting != "" {
+		fmt.Println("localtesting is set to:", localTesting)
+		go tree.ExampleTree()
+
+		e.Logger.Info(e.Start(":" + localTesting))
+	} else {
+		err := downloader.FileFromURL(downloadURL, filePath, certFile, keyFile)
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		go func() {
+			time.Sleep(24 * 60 * time.Hour)
+			ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+			defer cancel()
+			if err := e.Shutdown(ctx); err != nil {
+				e.Logger.Info(err)
 			}
-			return tmpl
-		}(),
+		}()
+
+		if _, err := os.Stat(filePath + certFile); os.IsNotExist(err) {
+			fmt.Println("Cert file does not exist:", err)
+		}
+
+		e.Logger.Info(e.StartTLS(startPort, filePath+certFile, filePath+keyFile))
 	}
-
-	e := echo.New()
-	e.Static("/", sitePath+"/static")
-	e.Renderer = t
-
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
-	e.GET("/", getHome)
-	e.GET("/home", getHome)
-	e.Logger.Info(e.Start(":8080"))
 }
